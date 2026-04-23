@@ -2,7 +2,6 @@
 id: your-domain-id
 name: Your Domain Name
 layer: domain
-feature: your-feature-id
 domain: your-domain-id
 bounded_context: your-bounded-context
 ---

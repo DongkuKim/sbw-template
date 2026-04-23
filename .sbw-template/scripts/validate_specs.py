@@ -342,21 +342,6 @@ def validate_graph(
                     f"{doc.relative_path}: linked view `{view.doc_id}` must point back to this BFF"
                 )
 
-        if doc.doc_type == "feature":
-            typed_fields = {
-                "views": "web-view",
-                "bffs": "bff",
-                "server_apis": "server",
-            }
-            for field, target_type in typed_fields.items():
-                for related_id in doc.front_matter.get(field, []):
-                    related = typed_index.get((target_type, related_id))
-                    if related and related.front_matter.get("feature") != doc.doc_id:
-                        errors.append(
-                            f"{doc.relative_path}: `{field}` entry `{related_id}` must point back "
-                            "to this feature"
-                        )
-
     return errors
 
 

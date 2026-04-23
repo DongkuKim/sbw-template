@@ -2,7 +2,6 @@
 id: your-layout-id
 name: Your Layout Name
 layer: web-layout
-feature: your-feature-id
 domain: your-domain-id
 slots:
   - body

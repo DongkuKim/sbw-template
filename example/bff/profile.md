@@ -2,7 +2,6 @@
 id: profile
 name: Profile BFF
 layer: bff
-feature: profile-experience
 domain: customer-identity
 view: profile
 server_apis:

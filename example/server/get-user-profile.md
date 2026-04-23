@@ -2,7 +2,6 @@
 id: get-user-profile
 name: Get User Profile
 layer: server
-feature: profile-experience
 domain: customer-identity
 method: GET
 path: /users/{userId}/profile
