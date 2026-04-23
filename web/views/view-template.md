@@ -19,13 +19,11 @@ shared_components:
 
 Describe the user goal and responsibility of this view.
 
-## Route and Guards
-
-Describe the URL pattern, entry requirements, and route protection.
-
 ## Layout Usage
 
 Describe the referenced layout and how the view fills its slots.
+
+The route path belongs in front matter under `route`. Route guards and entry policy should be documented in the linked NFR profile instead of repeated here.
 
 Recommended shape:
 

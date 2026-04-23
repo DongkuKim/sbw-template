@@ -20,10 +20,11 @@ This template describes a product through linked Markdown specs before implement
 - `web/views/` defines routes, layout usage, shared-component composition, and view-owned input mapping.
 - `web/layouts/` defines reusable page shells.
 - `web/shared-components/` defines reusable presentational building blocks.
-- `architecture/` contains optional shared reference docs for cross-cutting concerns.
+- `example/` contains a worked example that mirrors the same planning structure, including `example/architecture/` for concrete example reference docs.
+- `architecture/` contains reusable templates and shared reference docs for cross-cutting concerns.
 - `.sbw-template/` contains the validator, schemas, and tests for the template itself.
 
-Editable planning input lives in `features/`, `domains/`, `server/`, `bff/`, `web/`, and sometimes `architecture/`.
+Editable planning input lives in `features/`, `domains/`, `server/`, `bff/`, `web/`, and sometimes `architecture/`. The `example/` tree is a worked reference that uses the same format but should not be treated as the primary planning surface for a new product.
 
 Do not edit `.sbw-template/` unless your task is to maintain the template contract, validator, or validator tests.
 
@@ -33,7 +34,7 @@ Treat each doc type as authoritative for a specific concern.
 
 - `feature` is authoritative for product goal, scope, slice membership, linked docs, and the implementation boundary at slice level.
 - `domain` is authoritative for canonical names, entities, invariants, and lifecycle rules.
-- `web-view` is authoritative for route behavior, which layout and shared components are used, and how the view maps route or BFF values into shared-component inputs.
+- `web-view` is authoritative for route identity, which layout and shared components are used, and how the view maps route or BFF values into shared-component inputs.
 - `web-layout` is authoritative for shell structure, slot behavior, and the per-element shared-component composition owned by the layout.
 - `web-shared-component` is authoritative for reusable presentational behavior, internal structure, and the per-element base components, inputs, states, and interactions it composes from the listed UI libraries.
 - `bff` is authoritative for the web-facing contract, orchestration flow, failure handling, and data protection at the web boundary.
@@ -89,7 +90,7 @@ Use this workflow when the task is to create, refine, or correct the planning do
 - Copy the appropriate starter template and rename the file to the final `id`.
 - Keep filenames aligned with front matter `id`.
 - Fill required front matter and required sections.
-- For `web/views`, keep the body focused on layout usage and shared-component usage. Document which layout slots are filled and how the view maps values into each shared-component input.
+- For `web/views`, keep the body focused on layout usage and shared-component usage. Document which layout slots are filled and how the view maps values into each shared-component input. Keep route path in front matter and put route-guard policy in the linked NFR profile instead of the view body.
 - For `web/layouts`, document the internal area tree in `## Structure`, then document each important layout element in `## Elements` with its shared components, slot usage, structure notes, and responsive behavior.
 - For `web/shared-components`, document the machine-readable `libraries` list in front matter.
 - For `web/shared-components`, document the internal area tree in `## Structure`, then document each important element in `## Elements` with its base components, inputs, states, and interactions. Write interactions using explicit event notation like `<onHover>: ...`, `<onClick>: ...`, and `<onChange>: ...`. Name major areas and then name the elements inside them so another agent can map the spec directly to component structure.
@@ -125,13 +126,15 @@ Read the docs in this order:
 
 Suggested starting example:
 
-- [features/profile-experience.md](./features/profile-experience.md)
-- [domains/customer-identity.md](./domains/customer-identity.md)
-- [web/views/profile.md](./web/views/profile.md)
-- [web/layouts/account-shell.md](./web/layouts/account-shell.md)
-- [web/shared-components/user-summary-card.md](./web/shared-components/user-summary-card.md)
-- [bff/profile.md](./bff/profile.md)
-- [server/get-user-profile.md](./server/get-user-profile.md)
+- [example/features/profile-experience.md](./example/features/profile-experience.md)
+- [example/domains/customer-identity.md](./example/domains/customer-identity.md)
+- [example/architecture/adrs/adr-001-vertical-slice-bff.md](./example/architecture/adrs/adr-001-vertical-slice-bff.md)
+- [example/architecture/nfr-profiles/standard-web-product.md](./example/architecture/nfr-profiles/standard-web-product.md)
+- [example/web/views/profile.md](./example/web/views/profile.md)
+- [example/web/layouts/account-shell.md](./example/web/layouts/account-shell.md)
+- [example/web/shared-components/user-summary-card.md](./example/web/shared-components/user-summary-card.md)
+- [example/bff/profile.md](./example/bff/profile.md)
+- [example/server/get-user-profile.md](./example/server/get-user-profile.md)
 
 ### Implementation Checklist
 
@@ -139,6 +142,7 @@ Suggested starting example:
 - Use the domain doc to normalize names and business rules before writing code.
 - Build the web layer against the BFF contract, not directly against the server contract.
 - Use each view doc as the canonical source for layout choice, shared-component composition, and the value mapping from BFF or route data into shared-component inputs.
+- Use the linked NFR profile for web entry and route-guard policy instead of looking for those rules in the view body.
 - Use each layout doc as the canonical source for shell structure, slot ownership, responsive layout behavior, and any layout-owned shared components.
 - Use each shared-component doc as the canonical source for which UI libraries, internal areas, and per-element base components, inputs, states, and interactions must be composed in the implementation. Treat named areas and named elements as the target component breakdown unless the spec explicitly says they are optional or removed.
 - Build the BFF against the server contracts, applying any mapping, aggregation, redaction, or failure translation described there.
@@ -147,16 +151,16 @@ Suggested starting example:
 
 ## Optional Architecture References
 
-Use these when a feature or runtime doc links to them, or when you need the repo default for a cross-cutting concern.
+Use these root docs when a feature or runtime doc links to them, or when you need the reusable repo default for a cross-cutting concern.
 
-- [architecture/adrs/adr-001-vertical-slice-bff.md](./architecture/adrs/adr-001-vertical-slice-bff.md)
+- [architecture/adrs/adr-template.md](./architecture/adrs/adr-template.md)
 - [architecture/standards/clean-code.md](./architecture/standards/clean-code.md)
 - [architecture/standards/dependency-rules.md](./architecture/standards/dependency-rules.md)
 - [architecture/standards/auth-model.md](./architecture/standards/auth-model.md)
 - [architecture/standards/error-model.md](./architecture/standards/error-model.md)
 - [architecture/standards/observability.md](./architecture/standards/observability.md)
 - [architecture/standards/testing-and-release.md](./architecture/standards/testing-and-release.md)
-- [architecture/nfr-profiles/standard-web-product.md](./architecture/nfr-profiles/standard-web-product.md)
+- [architecture/nfr-profiles/nfr-profile-template.md](./architecture/nfr-profiles/nfr-profile-template.md)
 
 ## Validation
 

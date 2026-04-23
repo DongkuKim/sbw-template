@@ -27,11 +27,15 @@
   "list_fields": ["shared_components"],
   "required_sections": [
     "Purpose",
-    "Route and Guards",
     "Layout Usage",
     "Shared Component Usage"
   ],
-  "forbidden_sections": ["BFF Contract", "View States", "Acceptance Scenarios"],
+  "forbidden_sections": [
+    "Route and Guards",
+    "BFF Contract",
+    "View States",
+    "Acceptance Scenarios"
+  ],
   "references": [
     { "field": "feature", "doc_type": "feature" },
     { "field": "domain", "doc_type": "domain" },

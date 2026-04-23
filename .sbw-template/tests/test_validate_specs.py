@@ -9,6 +9,7 @@ from pathlib import Path
 
 TEMPLATE_ROOT = Path(__file__).resolve().parent.parent
 REPO_ROOT = TEMPLATE_ROOT.parent
+EXAMPLE_ROOT = REPO_ROOT / "example"
 sys.path.insert(0, str(TEMPLATE_ROOT))
 
 from scripts.validate_specs import validate_repository
@@ -346,10 +347,6 @@ Protection.
 
         Purpose.
 
-        ## Route and Guards
-
-        Guards.
-
         ## Layout Usage
 
         - `Layout`: `account-shell`
@@ -386,6 +383,10 @@ class ValidateSpecsTests(unittest.TestCase):
 
     def test_repository_example_passes(self) -> None:
         errors = validate_repository(REPO_ROOT)
+        self.assertEqual(errors, [])
+
+    def test_example_workspace_passes(self) -> None:
+        errors = validate_repository(EXAMPLE_ROOT)
         self.assertEqual(errors, [])
 
     def test_minimal_valid_fixture_passes(self) -> None:
@@ -542,7 +543,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 States.
                 """,
             )
-            self.assert_fixture_errors(root, "unexpected section `## BFF Contract`")
+            self.assert_fixture_errors(root, "unexpected section `## Route and Guards`")
 
     def test_missing_implementation_boundary_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
@@ -853,10 +854,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 ## Purpose
 
                 Purpose.
-
-                ## Route and Guards
-
-                Guards.
 
                 ## Layout Usage
 

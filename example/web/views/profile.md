@@ -17,16 +17,14 @@ shared_components:
 
 Render the signed-in user's profile summary inside the account experience.
 
-## Route and Guards
-
-The route is `/profile` and requires an authenticated user session before the BFF call is made.
-
 ## Layout Usage
 
 - `Layout`: `account-shell`
 - `Header slot`: page title content for `Profile`
 - `Body slot`: `user-summary-card` when profile summary data is available, otherwise lightweight inline fallback messaging owned by the view
 - `Aside slot`: none
+
+Route path is defined in front matter as `/profile`. Route protection follows the [standard web-product NFR profile](../../architecture/nfr-profiles/standard-web-product.md) instead of repeating guard rules here.
 
 ## Shared Component Usage
 

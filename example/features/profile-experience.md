@@ -35,7 +35,7 @@ The user opens `/profile`, the route guard confirms a signed-in session, the BFF
 ## Linked Specs
 
 - Domain: [customer-identity](../domains/customer-identity.md) defines the canonical user profile language.
-- Architecture: [adr-001-vertical-slice-bff](../architecture/adrs/adr-001-vertical-slice-bff.md) and [clean-code](../architecture/standards/clean-code.md) define the shared slice and code-shape defaults used by this feature.
+- Architecture: [adr-001-vertical-slice-bff](../architecture/adrs/adr-001-vertical-slice-bff.md) and [clean-code](../../architecture/standards/clean-code.md) define the shared slice and code-shape defaults used by this feature.
 - Server: [get-user-profile](../server/get-user-profile.md) provides the source system contract.
 - BFF: [profile](../bff/profile.md) shapes backend data into a stable view contract.
 - Web view: [profile](../web/views/profile.md) renders the feature through [account-shell](../web/layouts/account-shell.md) and [user-summary-card](../web/shared-components/user-summary-card.md).

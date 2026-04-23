@@ -2,7 +2,7 @@
 
 ## Security
 
-User-facing requests require authenticated sessions for protected routes, role checks at the BFF boundary, and secrets sourced from managed runtime configuration only.
+Protected web routes require authenticated sessions by default, view-level guard policy is defined here instead of in each view doc, role checks happen at the BFF boundary, and secrets come from managed runtime configuration only.
 
 ## Reliability and SLO
 

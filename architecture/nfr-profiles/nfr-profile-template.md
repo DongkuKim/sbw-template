@@ -4,7 +4,7 @@
 
 ## Security
 
-List required authentication, authorization, and secret-handling expectations.
+List required authentication, authorization, route-protection, and secret-handling expectations. This is the canonical place to define web entry policy and guard defaults instead of repeating them in each view doc.
 
 ## Reliability and SLO
 

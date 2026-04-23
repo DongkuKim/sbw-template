@@ -6,7 +6,7 @@ Make authentication and authorization requirements explicit during planning so p
 
 ## Rules
 
-- Web views state route guards and entry requirements.
+- NFR profiles define default route guards and web entry requirements.
 - BFF specs define session inputs, authorization checks, and data redaction responsibilities.
 - Server specs declare caller identity, permission checks, and sensitive field handling.
 
