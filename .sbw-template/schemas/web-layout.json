@@ -6,7 +6,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "slots"
   ],
@@ -14,7 +13,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "slots"
   ],
@@ -26,8 +24,5 @@
     "Usage Rules"
   ],
   "forbidden_sections": ["Slots", "Interaction Rules"],
-  "references": [
-    { "field": "feature", "doc_type": "feature" },
-    { "field": "domain", "doc_type": "domain" }
-  ]
+  "references": [{ "field": "domain", "doc_type": "domain" }]
 }

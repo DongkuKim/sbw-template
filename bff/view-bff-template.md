@@ -2,7 +2,6 @@
 id: your-bff-id
 name: Your BFF Name
 layer: bff
-feature: your-feature-id
 domain: your-domain-id
 view: your-view-id
 server_apis:
@@ -35,7 +34,7 @@ Describe the exact web-facing payload and action surface.
 
 ## Failure Handling
 
-Describe fallback behavior, partial failure policy, and user-safe errors. Link to shared error docs when the BFF follows a common policy.
+Describe fallback behavior, partial failure policy, and user-safe errors.
 
 ## Data Protection
 
@@ -45,7 +44,7 @@ Describe redaction, privacy, and session-boundary rules.
 
 - Transport: describe BFF routes, request parsing, and auth entry.
 - Application: describe orchestration use cases and ports.
-- Domain: describe any feature policy or invariants.
+- Domain: describe any domain policy or invariants.
 - Integrations: describe downstream clients and adapters.
 - Contracts: describe response schemas, DTOs, and mappers.
 - Tests: describe unit, integration, contract, and end-to-end coverage.

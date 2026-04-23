@@ -6,7 +6,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "view",
     "server_apis"
@@ -15,7 +14,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "view",
     "server_apis"
@@ -32,7 +30,6 @@
     "Implementation Boundary"
   ],
   "references": [
-    { "field": "feature", "doc_type": "feature" },
     { "field": "domain", "doc_type": "domain" },
     { "field": "view", "doc_type": "web-view" },
     { "field": "server_apis", "doc_type": "server", "many": true }

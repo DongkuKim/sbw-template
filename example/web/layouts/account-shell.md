@@ -2,7 +2,6 @@
 id: account-shell
 name: Account Shell
 layer: web-layout
-feature: profile-experience
 domain: customer-identity
 slots:
   - header
@@ -14,7 +13,7 @@ slots:
 
 ## Purpose
 
-Provide a reusable authenticated account page shell with navigation and a content slot for account features.
+Provide a reusable authenticated account page shell with navigation and a content slot for account views.
 
 ## Structure
 
@@ -48,9 +47,9 @@ Interaction events:
 ### `Body slot frame`
 
 - `Parent area`: `Content grid`
-- `Purpose`: provide the primary feature-content container for the view.
+- `Purpose`: provide the primary content container for the view.
 - `Shared components`: none
-- `Slot usage`: owns the `body` slot and renders the main feature surface.
+- `Slot usage`: owns the `body` slot and renders the main content surface.
 - `Structure notes`: takes the primary grid column and defines the reading flow for account pages.
 - `Responsive behavior`: remains primary content on all breakpoints and stacks above the aside when the layout collapses to one column.
 

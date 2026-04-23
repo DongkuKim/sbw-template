@@ -2,7 +2,6 @@
 id: customer-identity
 name: Customer Identity
 layer: domain
-feature: profile-experience
 domain: customer-identity
 bounded_context: account
 ---

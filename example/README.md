@@ -2,7 +2,6 @@
 
 Worked example docs live here in the same mirrored format as the main template:
 
-- `features/`
 - `domains/`
 - `server/`
 - `bff/`

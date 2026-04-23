@@ -2,7 +2,6 @@
 id: your-shared-component-id
 name: Your Shared Component Name
 layer: web-shared-component
-feature: your-feature-id
 domain: your-domain-id
 libraries:
   - shadcn

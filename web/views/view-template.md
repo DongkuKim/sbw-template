@@ -2,7 +2,6 @@
 id: your-view-id
 name: Your View Name
 layer: web-view
-feature: your-feature-id
 domain: your-domain-id
 route: /your-route
 layout: your-layout-id
@@ -23,11 +22,12 @@ Describe the user goal and responsibility of this view.
 
 Describe the referenced layout and how the view fills its slots.
 
-The route path belongs in front matter under `route`. Route guards and entry policy should be documented in the linked NFR profile instead of repeated here.
+The route path belongs in front matter under `route`. Route guards and entry policy should be documented here when they affect the view.
 
 Recommended shape:
 
 - `Layout`: name the layout used by this view.
+- `Route guard`: describe auth or entry requirements, or say `none`.
 - `Header slot`: describe what the view places here, or say `none`.
 - `Body slot`: describe the primary content or shared components placed here.
 - `Aside slot`: describe optional secondary content, or say `none`.

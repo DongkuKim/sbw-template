@@ -2,7 +2,6 @@
 id: your-server-api-id
 name: Your Server API Name
 layer: server
-feature: your-feature-id
 domain: your-domain-id
 method: GET
 path: /your/api/path
@@ -26,11 +25,11 @@ Describe success shape, important fields, pagination, and compatibility notes.
 
 ## Auth and Authorization
 
-Describe caller identity, required permissions, and sensitive field rules. Link to shared auth docs when the rule is inherited rather than endpoint-specific.
+Describe caller identity, required permissions, and sensitive field rules.
 
 ## Error Model
 
-Describe expected failure categories, status mapping, and retry semantics. Link to shared error docs when the rule is common across endpoints.
+Describe expected failure categories, status mapping, and retry semantics.
 
 ## Operational Policy
 

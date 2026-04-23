@@ -6,7 +6,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "method",
     "path"
@@ -15,7 +14,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "method",
     "path"
@@ -31,7 +29,6 @@
     "Implementation Boundary"
   ],
   "references": [
-    { "field": "feature", "doc_type": "feature" },
     { "field": "domain", "doc_type": "domain" }
   ],
   "requires_implementation_boundary": true

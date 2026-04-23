@@ -6,7 +6,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "route",
     "layout",
@@ -17,7 +16,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "route",
     "layout",
@@ -37,7 +35,6 @@
     "Acceptance Scenarios"
   ],
   "references": [
-    { "field": "feature", "doc_type": "feature" },
     { "field": "domain", "doc_type": "domain" },
     { "field": "layout", "doc_type": "web-layout" },
     { "field": "bff", "doc_type": "bff" },

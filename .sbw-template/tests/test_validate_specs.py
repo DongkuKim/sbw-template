@@ -34,70 +34,12 @@ def build_base_valid_fixture(root: Path, *, server_ids: list[str] | None = None)
 
     write(
         root,
-        "features/profile-experience.md",
-        f"""---
-id: profile-experience
-name: Profile Experience
-layer: feature
-feature: profile-experience
-domain: customer-identity
-views:
-  - profile
-bffs:
-  - profile
-server_apis:
-{server_list}
----
-# Profile Experience
-
-## Goal
-
-Goal.
-
-## Scope
-
-Scope.
-
-## Actors
-
-Actors.
-
-## User Flows
-
-Flows.
-
-## Linked Specs
-
-Links.
-
-## Implementation Boundary
-
-- Transport: transport.
-- Application: application.
-- Domain: domain.
-- Integrations: integrations.
-- Contracts: contracts.
-- Tests: tests.
-
-## Acceptance Scenarios
-
-Acceptance.
-
-## Rollout and Backout
-
-Rollout.
-""",
-    )
-
-    write(
-        root,
         "domains/customer-identity.md",
         f"""
         ---
         id: customer-identity
         name: Customer Identity
         layer: domain
-        feature: profile-experience
         domain: customer-identity
         bounded_context: account
         ---
@@ -133,7 +75,6 @@ Rollout.
             id: {server_id}
             name: {server_id}
             layer: server
-            feature: profile-experience
             domain: customer-identity
             method: GET
             path: /{server_id}
@@ -185,7 +126,6 @@ Rollout.
 id: profile
 name: Profile BFF
 layer: bff
-feature: profile-experience
 domain: customer-identity
 view: profile
 server_apis:
@@ -240,7 +180,6 @@ Protection.
         id: account-shell
         name: Account Shell
         layer: web-layout
-        feature: profile-experience
         domain: customer-identity
         slots:
           - body
@@ -286,7 +225,6 @@ Protection.
         id: user-summary-card
         name: User Summary Card
         layer: web-shared-component
-        feature: profile-experience
         domain: customer-identity
         libraries:
           - shadcn
@@ -333,7 +271,6 @@ Protection.
         id: profile
         name: Profile View
         layer: web-view
-        feature: profile-experience
         domain: customer-identity
         route: /profile
         layout: account-shell
@@ -404,28 +341,20 @@ class ValidateSpecsTests(unittest.TestCase):
             )
             self.assertEqual(validate_repository(root), [])
 
-    def test_architecture_docs_are_ignored_by_validation(self) -> None:
+    def test_non_schema_docs_are_ignored_by_validation(self) -> None:
         temp_dir, root = self.with_fixture()
         with temp_dir:
             build_base_valid_fixture(root)
             write(
                 root,
-                "architecture/reference/auth-and-observability.md",
+                "notes/reference/auth-and-observability.md",
                 """
                 # Shared Auth And Observability
 
-                This file is intentionally free-form and should be linked from feature or runtime docs
-                instead of copied into multiple places.
+                This file is intentionally free-form and is outside the validated doc directories.
                 """,
             )
             self.assertEqual(validate_repository(root), [])
-
-    def test_missing_feature_fixture_fails(self) -> None:
-        temp_dir, root = self.with_fixture()
-        with temp_dir:
-            build_base_valid_fixture(root)
-            (root / "features" / "profile-experience.md").unlink()
-            self.assert_fixture_errors(root, "references missing id `profile-experience`")
 
     def test_missing_domain_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
@@ -446,7 +375,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: profile
                 name: Profile View
                 layer: web-view
-                feature: profile-experience
                 domain: customer-identity
                 route: /profile
                 layout: account-shell
@@ -500,7 +428,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: profile
                 name: Profile View
                 layer: web-view
-                feature: profile-experience
                 domain: customer-identity
                 route: /profile
                 layout: account-shell
@@ -557,7 +484,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: get-user-profile
                 name: get-user-profile
                 layer: server
-                feature: profile-experience
                 domain: customer-identity
                 method: GET
                 path: /get-user-profile
@@ -603,7 +529,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: account-shell
                 name: Account Shell
                 layer: web-layout
-                feature: profile-experience
                 domain: customer-identity
                 slots:
                   - body
@@ -641,7 +566,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: user-summary-card
                 name: User Summary Card
                 layer: web-shared-component
-                feature: profile-experience
                 domain: customer-identity
                 libraries:
                   - shadcn
@@ -688,7 +612,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: user-summary-card
                 name: User Summary Card
                 layer: web-shared-component
-                feature: profile-experience
                 domain: customer-identity
                 libraries:
                   - shadcn
@@ -726,7 +649,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: user-summary-card
                 name: User Summary Card
                 layer: web-shared-component
-                feature: profile-experience
                 domain: customer-identity
                 libraries:
                   - shadcn
@@ -769,7 +691,7 @@ class ValidateSpecsTests(unittest.TestCase):
             )
             self.assert_fixture_errors(root, "unexpected section `## Inputs`")
 
-    def test_feature_back_link_mismatch_fixture_fails(self) -> None:
+    def test_unexpected_feature_field_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
         with temp_dir:
             build_base_valid_fixture(root)
@@ -781,7 +703,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: profile
                 name: Profile BFF
                 layer: bff
-                feature: another-feature
+                feature: profile-experience
                 domain: customer-identity
                 view: profile
                 server_apis:
@@ -827,7 +749,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 - Tests: tests.
                 """,
             )
-            self.assert_fixture_errors(root, "`bffs` entry `profile` must point back to this feature")
+            self.assert_fixture_errors(root, "unexpected front matter field `feature`")
 
     def test_bff_view_link_mismatch_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
@@ -841,7 +763,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 id: profile
                 name: Profile View
                 layer: web-view
-                feature: profile-experience
                 domain: customer-identity
                 route: /profile
                 layout: account-shell

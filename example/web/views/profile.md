@@ -2,7 +2,6 @@
 id: profile
 name: Profile View
 layer: web-view
-feature: profile-experience
 domain: customer-identity
 route: /profile
 layout: account-shell
@@ -20,11 +19,10 @@ Render the signed-in user's profile summary inside the account experience.
 ## Layout Usage
 
 - `Layout`: `account-shell`
+- `Route guard`: signed-in session required before the view calls the BFF
 - `Header slot`: page title content for `Profile`
 - `Body slot`: `user-summary-card` when profile summary data is available, otherwise lightweight inline fallback messaging owned by the view
 - `Aside slot`: none
-
-Route path is defined in front matter as `/profile`. Route protection follows the [standard web-product NFR profile](../../architecture/nfr-profiles/standard-web-product.md) instead of repeating guard rules here.
 
 ## Shared Component Usage
 

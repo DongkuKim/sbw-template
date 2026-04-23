@@ -2,7 +2,6 @@
 id: user-summary-card
 name: User Summary Card
 layer: web-shared-component
-feature: profile-experience
 domain: customer-identity
 libraries:
   - shadcn
@@ -92,4 +91,4 @@ Interaction events:
 
 ## Usage Rules
 
-The component is presentational only. It does not fetch data, inspect session state, or decide feature behavior.
+The component is presentational only. It does not fetch data, inspect session state, or decide product behavior.

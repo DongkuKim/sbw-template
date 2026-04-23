@@ -6,7 +6,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "bounded_context"
   ],
@@ -14,7 +13,6 @@
     "id",
     "name",
     "layer",
-    "feature",
     "domain",
     "bounded_context"
   ],
@@ -26,8 +24,6 @@
     "Ownership and Lifecycle",
     "Shared Language"
   ],
-  "references": [
-    { "field": "feature", "doc_type": "feature" }
-  ],
+  "references": [],
   "self_ref_fields": ["domain"]
 }
