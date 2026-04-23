@@ -1,0 +1,33 @@
+{
+  "doc_type": "domain",
+  "directory": "domains",
+  "allowed_layers": ["domain"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "bounded_context"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "bounded_context"
+  ],
+  "list_fields": [],
+  "required_sections": [
+    "Purpose",
+    "Entities and Value Objects",
+    "Invariants",
+    "Ownership and Lifecycle",
+    "Shared Language"
+  ],
+  "references": [
+    { "field": "feature", "doc_type": "feature" }
+  ],
+  "self_ref_fields": ["domain"]
+}

@@ -1,0 +1,33 @@
+{
+  "doc_type": "web-layout",
+  "directory": "web/layouts",
+  "allowed_layers": ["web-layout"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "slots"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "slots"
+  ],
+  "list_fields": ["slots"],
+  "required_sections": [
+    "Purpose",
+    "Structure",
+    "Elements",
+    "Usage Rules"
+  ],
+  "forbidden_sections": ["Slots", "Interaction Rules"],
+  "references": [
+    { "field": "feature", "doc_type": "feature" },
+    { "field": "domain", "doc_type": "domain" }
+  ]
+}

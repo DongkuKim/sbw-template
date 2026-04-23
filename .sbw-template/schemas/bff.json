@@ -1,0 +1,41 @@
+{
+  "doc_type": "bff",
+  "directory": "bff",
+  "allowed_layers": ["bff"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "view",
+    "server_apis"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "view",
+    "server_apis"
+  ],
+  "list_fields": ["server_apis"],
+  "required_sections": [
+    "Purpose",
+    "View Inputs",
+    "Orchestration Flow",
+    "Server API Usage",
+    "View Contract",
+    "Failure Handling",
+    "Data Protection",
+    "Implementation Boundary"
+  ],
+  "references": [
+    { "field": "feature", "doc_type": "feature" },
+    { "field": "domain", "doc_type": "domain" },
+    { "field": "view", "doc_type": "web-view" },
+    { "field": "server_apis", "doc_type": "server", "many": true }
+  ],
+  "requires_implementation_boundary": true
+}
