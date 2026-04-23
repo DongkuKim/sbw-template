@@ -1,0 +1,38 @@
+{
+  "doc_type": "server",
+  "directory": "server",
+  "allowed_layers": ["server"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "method",
+    "path"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "method",
+    "path"
+  ],
+  "list_fields": [],
+  "required_sections": [
+    "Purpose",
+    "Request Contract",
+    "Response Contract",
+    "Auth and Authorization",
+    "Error Model",
+    "Operational Policy",
+    "Implementation Boundary"
+  ],
+  "references": [
+    { "field": "feature", "doc_type": "feature" },
+    { "field": "domain", "doc_type": "domain" }
+  ],
+  "requires_implementation_boundary": true
+}

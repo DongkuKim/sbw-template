@@ -1,0 +1,34 @@
+{
+  "doc_type": "web-shared-component",
+  "directory": "web/shared-components",
+  "allowed_layers": ["web-shared-component"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "libraries"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "libraries"
+  ],
+  "list_fields": ["libraries"],
+  "required_sections": [
+    "Purpose",
+    "Composition",
+    "Structure",
+    "Elements",
+    "Usage Rules"
+  ],
+  "forbidden_sections": ["Inputs", "States", "Interactions"],
+  "references": [
+    { "field": "feature", "doc_type": "feature" },
+    { "field": "domain", "doc_type": "domain" }
+  ]
+}

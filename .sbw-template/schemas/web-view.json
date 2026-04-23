@@ -1,0 +1,42 @@
+{
+  "doc_type": "web-view",
+  "directory": "web/views",
+  "allowed_layers": ["web-view"],
+  "allowed_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "route",
+    "layout",
+    "bff",
+    "shared_components"
+  ],
+  "required_front_matter": [
+    "id",
+    "name",
+    "layer",
+    "feature",
+    "domain",
+    "route",
+    "layout",
+    "bff",
+    "shared_components"
+  ],
+  "list_fields": ["shared_components"],
+  "required_sections": [
+    "Purpose",
+    "Route and Guards",
+    "Layout Usage",
+    "Shared Component Usage"
+  ],
+  "forbidden_sections": ["BFF Contract", "View States", "Acceptance Scenarios"],
+  "references": [
+    { "field": "feature", "doc_type": "feature" },
+    { "field": "domain", "doc_type": "domain" },
+    { "field": "layout", "doc_type": "web-layout" },
+    { "field": "bff", "doc_type": "bff" },
+    { "field": "shared_components", "doc_type": "web-shared-component", "many": true }
+  ]
+}
