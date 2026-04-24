@@ -14,25 +14,65 @@ server_apis:
 
 Provide the single web-facing contract required to render the signed-in profile view.
 
+## BFF Path
+
+- Route template: `/bff/profile`
+- Route params source of truth: this path template (no params).
+
 ## View Inputs
 
-The BFF receives the signed-in session, the route context for `/profile`, and no user-supplied mutation payload.
+- Route params: none
+- Query params: none
+- Session/Auth inputs:
+
+```ts
+type SessionInput = {
+  userId: string;
+  roles: string[];
+  tenantId?: string;
+  permissions?: string[];
+  [key: string]: unknown;
+};
+```
+
+## BFF API (Web-facing)
+
+- Request type:
+
+```ts
+type ProfileRequest = {};
+```
+
+- Response type:
+
+```ts
+type ProfileResponse = {
+  profileSummary: {
+    displayName: string;
+    primaryEmail: string;
+    membershipTier?: string;
+  };
+  viewState: "loading" | "success" | "retryable-error" | "access-denied" | "not-found";
+};
+```
 
 ## Orchestration Flow
 
-The BFF authenticates the session, resolves the effective user id, calls `get-user-profile`, maps the backend fields into stable view props, and classifies downstream failures into user-safe view states.
+1. Parse and validate request.
+2. Enforce auth and policy.
+3. Call downstream API (`get-user-profile`) using the authenticated user id.
+4. Map downstream DTO fields into `ProfileResponse`.
+5. Return typed response with user-safe `viewState`.
 
 ## Server API Usage
 
-`get-user-profile` is invoked on each profile page load to fetch canonical identity data for the current user.
-
-## View Contract
-
-The response returns `profileSummary` with display name, primary email, membership tier, and a `viewState` envelope that lets the web layer render loading, success, or retryable error states without backend-specific branching.
+- `get-user-profile`: fetch canonical identity data for the authenticated user on profile page load.
 
 ## Failure Handling
 
-Backend `404` becomes a recoverable empty or not-found experience, `403` becomes an access-denied state, and transport failures become retryable generic errors. The BFF does not leak internal stack or vendor details.
+- `404` -> `not-found`
+- `403` -> `access-denied`
+- transport/downstream failure -> `retryable-error`
 
 ## Data Protection
 

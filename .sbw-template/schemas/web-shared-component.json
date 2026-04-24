@@ -6,24 +6,46 @@
     "id",
     "name",
     "layer",
-    "domain",
-    "libraries"
+    "component_kind",
+    "libraries",
+    "wraps"
   ],
   "required_front_matter": [
     "id",
     "name",
     "layer",
-    "domain",
+    "component_kind",
     "libraries"
+  ],
+  "enum_front_matter": {
+    "component_kind": ["custom", "wrapper"]
+  },
+  "conditional_required_front_matter": [
+    {
+      "if_field": "component_kind",
+      "if_equals": "wrapper",
+      "required_fields": ["wraps"]
+    }
   ],
   "list_fields": ["libraries"],
   "required_sections": [
     "Purpose",
-    "Composition",
+    "Public Interface",
     "Structure",
     "Elements",
     "Usage Rules"
   ],
-  "forbidden_sections": ["Inputs", "States", "Interactions"],
-  "references": [{ "field": "domain", "doc_type": "domain" }]
+  "conditional_required_sections": [
+    {
+      "if_field": "component_kind",
+      "if_equals": "custom",
+      "required_sections": ["Intent", "UX Contract", "State & Data"]
+    },
+    {
+      "if_field": "component_kind",
+      "if_equals": "wrapper",
+      "required_sections": ["Wrapped Component", "Wrapper Contract"]
+    }
+  ],
+  "forbidden_sections": ["Inputs", "States", "Interactions"]
 }

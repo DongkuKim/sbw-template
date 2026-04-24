@@ -137,9 +137,17 @@ server_apis:
 
 Purpose.
 
+## BFF Path
+
+/profile
+
 ## View Inputs
 
 Inputs.
+
+## BFF API (Web-facing)
+
+API.
 
 ## Orchestration Flow
 
@@ -148,10 +156,6 @@ Flow.
 ## Server API Usage
 
 Usage.
-
-## View Contract
-
-Contract.
 
 ## Failure Handling
 
@@ -219,25 +223,37 @@ Protection.
 
     write(
         root,
-        "web/shared-components/user-summary-card.md",
+        "web/shared-components/profile-card.md",
         f"""
         ---
-        id: user-summary-card
-        name: User Summary Card
+        id: profile-card
+        name: Profile Card
         layer: web-shared-component
-        domain: customer-identity
+        component_kind: custom
         libraries:
           - shadcn
         ---
-        # User Summary Card
+        # Profile Card
+
+        ## Intent
+
+        Intent.
 
         ## Purpose
 
         Purpose.
 
-        ## Composition
+        ## UX Contract
 
-        Composition.
+        UX.
+
+        ## Public Interface
+
+        Interface.
+
+        ## State & Data
+
+        State.
 
         ## Structure
 
@@ -276,7 +292,7 @@ Protection.
         layout: account-shell
         bff: profile
         shared_components:
-          - user-summary-card
+          - profile-card
         ---
         # Profile View
 
@@ -288,12 +304,12 @@ Protection.
 
         - `Layout`: `account-shell`
         - `Header slot`: page title content
-        - `Body slot`: `user-summary-card`
+        - `Body slot`: `profile-card`
         - `Aside slot`: none
 
         ## Shared Component Usage
 
-        ### `user-summary-card`
+        ### `profile-card`
 
         - `Placement`: `account-shell` `body` slot
         - `When used`: rendered when profile data is available
@@ -380,7 +396,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 layout: account-shell
                 bff: profile
                 shared_components:
-                  - user-summary-card
+                  - profile-card
                 server_apis:
                   - get-user-profile
                 ---
@@ -398,12 +414,12 @@ class ValidateSpecsTests(unittest.TestCase):
 
                 - `Layout`: `account-shell`
                 - `Header slot`: page title content
-                - `Body slot`: `user-summary-card`
+                - `Body slot`: `profile-card`
                 - `Aside slot`: none
 
                 ## Shared Component Usage
 
-                ### `user-summary-card`
+                ### `profile-card`
 
                 - `Placement`: `account-shell` `body` slot
                 - `When used`: rendered when profile data is available
@@ -433,7 +449,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 layout: account-shell
                 bff: profile
                 shared_components:
-                  - user-summary-card
+                  - profile-card
                 ---
                 # Profile View
 
@@ -449,7 +465,7 @@ class ValidateSpecsTests(unittest.TestCase):
 
                 - `Layout`: `account-shell`
                 - `Header slot`: page title content
-                - `Body slot`: `user-summary-card`
+                - `Body slot`: `profile-card`
                 - `Aside slot`: none
 
                 ## BFF Contract
@@ -458,7 +474,7 @@ class ValidateSpecsTests(unittest.TestCase):
 
                 ## Shared Component Usage
 
-                ### `user-summary-card`
+                ### `profile-card`
 
                 - `Placement`: `account-shell` `body` slot
                 - `When used`: rendered when profile data is available
@@ -554,27 +570,39 @@ class ValidateSpecsTests(unittest.TestCase):
             )
             self.assert_fixture_errors(root, "unexpected section `## Slots`")
 
-    def test_missing_shared_component_composition_fixture_fails(self) -> None:
+    def test_missing_shared_component_public_interface_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
         with temp_dir:
             build_base_valid_fixture(root)
             write(
                 root,
-                "web/shared-components/user-summary-card.md",
+                "web/shared-components/profile-card.md",
                 """
                 ---
-                id: user-summary-card
-                name: User Summary Card
+                id: profile-card
+                name: Profile Card
                 layer: web-shared-component
-                domain: customer-identity
+                component_kind: custom
                 libraries:
                   - shadcn
                 ---
-                # User Summary Card
+                # Profile Card
+
+                ## Intent
+
+                Intent.
 
                 ## Purpose
 
                 Purpose.
+
+                ## UX Contract
+
+                UX.
+
+                ## State & Data
+
+                State.
 
                 ## Structure
 
@@ -598,7 +626,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 Rules.
                 """,
             )
-            self.assert_fixture_errors(root, "missing section `## Composition`")
+            self.assert_fixture_errors(root, "missing section `## Public Interface`")
 
     def test_missing_shared_component_elements_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
@@ -606,25 +634,37 @@ class ValidateSpecsTests(unittest.TestCase):
             build_base_valid_fixture(root)
             write(
                 root,
-                "web/shared-components/user-summary-card.md",
+                "web/shared-components/profile-card.md",
                 """
                 ---
-                id: user-summary-card
-                name: User Summary Card
+                id: profile-card
+                name: Profile Card
                 layer: web-shared-component
-                domain: customer-identity
+                component_kind: custom
                 libraries:
                   - shadcn
                 ---
-                # User Summary Card
+                # Profile Card
+
+                ## Intent
+
+                Intent.
 
                 ## Purpose
 
                 Purpose.
 
-                ## Composition
+                ## UX Contract
 
-                Composition.
+                UX.
+
+                ## Public Interface
+
+                Interface.
+
+                ## State & Data
+
+                State.
 
                 ## Structure
 
@@ -643,25 +683,37 @@ class ValidateSpecsTests(unittest.TestCase):
             build_base_valid_fixture(root)
             write(
                 root,
-                "web/shared-components/user-summary-card.md",
+                "web/shared-components/profile-card.md",
                 """
                 ---
-                id: user-summary-card
-                name: User Summary Card
+                id: profile-card
+                name: Profile Card
                 layer: web-shared-component
-                domain: customer-identity
+                component_kind: custom
                 libraries:
                   - shadcn
                 ---
-                # User Summary Card
+                # Profile Card
+
+                ## Intent
+
+                Intent.
 
                 ## Purpose
 
                 Purpose.
 
-                ## Composition
+                ## UX Contract
 
-                Composition.
+                UX.
+
+                ## Public Interface
+
+                Interface.
+
+                ## State & Data
+
+                State.
 
                 ## Structure
 
@@ -691,6 +743,204 @@ class ValidateSpecsTests(unittest.TestCase):
             )
             self.assert_fixture_errors(root, "unexpected section `## Inputs`")
 
+    def test_invalid_shared_component_kind_fixture_fails(self) -> None:
+        temp_dir, root = self.with_fixture()
+        with temp_dir:
+            build_base_valid_fixture(root)
+            write(
+                root,
+                "web/shared-components/profile-card.md",
+                """
+                ---
+                id: profile-card
+                name: Profile Card
+                layer: web-shared-component
+                component_kind: domain
+                libraries:
+                  - shadcn
+                ---
+                # Profile Card
+
+                ## Purpose
+
+                Purpose.
+
+                ## Public Interface
+
+                Interface.
+
+                ## Structure
+
+                Structure.
+
+                ## Elements
+
+                Elements.
+
+                ## Usage Rules
+
+                Rules.
+                """,
+            )
+            self.assert_fixture_errors(
+                root,
+                "field `component_kind` must be one of `custom`, `wrapper`",
+            )
+
+    def test_missing_custom_shared_component_intent_fixture_fails(self) -> None:
+        temp_dir, root = self.with_fixture()
+        with temp_dir:
+            build_base_valid_fixture(root)
+            write(
+                root,
+                "web/shared-components/profile-card.md",
+                """
+                ---
+                id: profile-card
+                name: Profile Card
+                layer: web-shared-component
+                component_kind: custom
+                libraries:
+                  - shadcn
+                ---
+                # Profile Card
+
+                ## Purpose
+
+                Purpose.
+
+                ## UX Contract
+
+                UX.
+
+                ## Public Interface
+
+                Interface.
+
+                ## State & Data
+
+                State.
+
+                ## Structure
+
+                Structure.
+
+                ## Elements
+
+                Elements.
+
+                ## Usage Rules
+
+                Rules.
+                """,
+            )
+            self.assert_fixture_errors(
+                root,
+                "missing section `## Intent` when `component_kind` is `custom`",
+            )
+
+    def test_missing_wrapper_wraps_fixture_fails(self) -> None:
+        temp_dir, root = self.with_fixture()
+        with temp_dir:
+            build_base_valid_fixture(root)
+            write(
+                root,
+                "web/shared-components/icon-button.md",
+                """
+                ---
+                id: icon-button
+                name: Icon Button
+                layer: web-shared-component
+                component_kind: wrapper
+                libraries:
+                  - shadcn
+                ---
+                # Icon Button
+
+                ## Purpose
+
+                Purpose.
+
+                ## Wrapped Component
+
+                Wrapped.
+
+                ## Public Interface
+
+                Interface.
+
+                ## Wrapper Contract
+
+                Contract.
+
+                ## Structure
+
+                Structure.
+
+                ## Elements
+
+                Elements.
+
+                ## Usage Rules
+
+                Rules.
+                """,
+            )
+            self.assert_fixture_errors(
+                root,
+                "missing front matter field `wraps` when `component_kind` is `wrapper`",
+            )
+
+    def test_wrapper_shared_component_fixture_passes(self) -> None:
+        temp_dir, root = self.with_fixture()
+        with temp_dir:
+            build_base_valid_fixture(root)
+            write(
+                root,
+                "web/shared-components/icon-button.md",
+                """
+                ---
+                id: icon-button
+                name: Icon Button
+                layer: web-shared-component
+                component_kind: wrapper
+                libraries:
+                  - shadcn
+                wraps: shadcn/button
+                ---
+                # Icon Button
+
+                ## Purpose
+
+                Purpose.
+
+                ## Wrapped Component
+
+                Wrapped.
+
+                ## Public Interface
+
+                Interface.
+
+                ## Wrapper Contract
+
+                Contract.
+
+                ## Structure
+
+                Structure.
+
+                ## Elements
+
+                Elements.
+
+                ## Usage Rules
+
+                Rules.
+                """,
+            )
+            self.assertEqual(validate_repository(root), [])
+
     def test_unexpected_feature_field_fixture_fails(self) -> None:
         temp_dir, root = self.with_fixture()
         with temp_dir:
@@ -715,9 +965,17 @@ class ValidateSpecsTests(unittest.TestCase):
 
                 Purpose.
 
+                ## BFF Path
+
+                /profile
+
                 ## View Inputs
 
                 Inputs.
+
+                ## BFF API (Web-facing)
+
+                API.
 
                 ## Orchestration Flow
 
@@ -726,10 +984,6 @@ class ValidateSpecsTests(unittest.TestCase):
                 ## Server API Usage
 
                 Usage.
-
-                ## View Contract
-
-                Contract.
 
                 ## Failure Handling
 
@@ -768,7 +1022,7 @@ class ValidateSpecsTests(unittest.TestCase):
                 layout: account-shell
                 bff: another-bff
                 shared_components:
-                  - user-summary-card
+                  - profile-card
                 ---
                 # Profile View
 
@@ -780,12 +1034,12 @@ class ValidateSpecsTests(unittest.TestCase):
 
                 - `Layout`: `account-shell`
                 - `Header slot`: page title content
-                - `Body slot`: `user-summary-card`
+                - `Body slot`: `profile-card`
                 - `Aside slot`: none
 
                 ## Shared Component Usage
 
-                ### `user-summary-card`
+                ### `profile-card`
 
                 - `Placement`: `account-shell` `body` slot
                 - `When used`: rendered when profile data is available

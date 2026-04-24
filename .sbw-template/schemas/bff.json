@@ -21,10 +21,11 @@
   "list_fields": ["server_apis"],
   "required_sections": [
     "Purpose",
+    "BFF Path",
     "View Inputs",
+    "BFF API (Web-facing)",
     "Orchestration Flow",
     "Server API Usage",
-    "View Contract",
     "Failure Handling",
     "Data Protection",
     "Implementation Boundary"

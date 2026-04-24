@@ -16,21 +16,73 @@ server_apis:
 
 Describe the view-level data and actions this BFF provides.
 
+## BFF Path
+
+- Route template: `/bff/<view-path>/:id?`
+- Route params source of truth: this path template
+
 ## View Inputs
 
-Describe route params, query params, and session inputs.
+- Route params: from `BFF Path` template
+- Query params:
+  - `q?: string`
+  - `status?: string`
+  - `page: number`
+  - `pageSize: number`
+- Session/Auth inputs:
+
+```ts
+type SessionInput = {
+  userId: string;
+  roles: string[];
+  tenantId?: string;
+  permissions?: string[];
+  [key: string]: unknown;
+};
+```
+
+## BFF API (Web-facing)
+
+- Request type:
+
+```ts
+type <View>Request = {
+  q?: string;
+  status?: string;
+  page: number;
+  pageSize: number;
+};
+```
+
+- Response type:
+
+```ts
+type <View>Response = {
+  items: <View>Item[];
+  page: number;
+  pageSize: number;
+  total: number;
+};
+
+type <View>Item = {
+  id: string;
+  name: string;
+  status: string;
+  updatedAt: string;
+};
+```
 
 ## Orchestration Flow
 
-Describe how the BFF sequences downstream calls, policy checks, and mapping.
+1. Parse and validate request.
+2. Enforce auth and policy.
+3. Call downstream API(s).
+4. Map downstream DTOs to view response.
+5. Return typed response.
 
 ## Server API Usage
 
 List each downstream API and why it is called.
-
-## View Contract
-
-Describe the exact web-facing payload and action surface.
 
 ## Failure Handling
 

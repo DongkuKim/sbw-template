@@ -17,17 +17,39 @@ Describe the shell or structure this layout provides.
 
 ## Structure
 
-Describe the area hierarchy of the layout and where slots or persistent shell elements live.
+Describe the layout as code-level composition (layout primitives + shared components), including where slots and persistent shell elements live.
 
 Recommended shape:
 
-### Areas
+### Composition
 
-- `Area name`: describe each major region such as a top bar, content grid, side rail, or footer shell.
+```tsx
+export default function YourPageLayout() {
+  return (
+    <PageShell direction="col" height="100vh">
+      <TopBar height={64} />
 
-### Elements
+      <Main direction="col" topOffset={64} height="calc(100vh - 64px)">
+        <FilterRow height={56} direction="row" wrapOnMobile />
 
-- `Element name`: name each important structural element and note which area it belongs to.
+        <Body direction="col" flex={1}>
+          <PrimaryArea flex={1} />
+          <SecondaryArea width={360} hiddenBelow="lg" />
+          <PaginationRow height={48} align="end" />
+        </Body>
+      </Main>
+
+      <ModalHost />
+      <DrawerHost />
+      <ToastHost />
+    </PageShell>
+  );
+}
+```
+
+### Composition Notes
+
+- `Element name`: list each important structural element from the composition.
 - `Slot or condition`: note the slot it owns, whether it is persistent layout chrome, and any optional or responsive conditions.
 
 ## Elements
@@ -38,19 +60,17 @@ Recommended shape:
 
 ### `Element name`
 
-- `Parent area`: where the element lives.
 - `Purpose`: what structural responsibility the element has in the layout.
 - `Shared components`: list the shared components used by this element, or say `none`.
 - `Slot usage`: describe which slot this element owns, wraps, or exposes and what kind of content belongs there.
 - `Structure notes`: describe positioning, containment, sticky behavior, ordering, or other structure-specific rules.
 - `Responsive behavior`: describe how the element moves, stacks, hides, or changes across breakpoints.
+- `Interaction events`: list layout-owned events only using explicit notation:
+  - `<onHover>`: ...
+  - `<onClick>`: ...
+  - `<onOpen>` / `<onClose>`: ...
 
-Interaction events:
-`<onHover>`: describe behavior only when the layout owns it.
-`<onClick>`: describe behavior only when the layout owns it.
-`<onOpen>` or `<onClose>`: describe layout-owned disclosure behavior when relevant.
-
-If the layout does not own any interaction for this element, say so explicitly, for example `<onClick>: none.`
+If the layout does not own interactions for this element, say so explicitly, for example `<onClick>: none.`
 
 ## Usage Rules
 
