@@ -206,9 +206,28 @@ def validate_doc(doc: SpecDoc) -> list[str]:
         if field not in front_matter:
             errors.append(f"{doc.relative_path}: missing front matter field `{field}`")
 
+    for condition in schema.get("conditional_required_front_matter", []):
+        if front_matter.get(condition["if_field"]) != condition["if_equals"]:
+            continue
+        for field in condition.get("required_fields", []):
+            if field not in front_matter:
+                errors.append(
+                    f"{doc.relative_path}: missing front matter field `{field}` "
+                    f"when `{condition['if_field']}` is `{condition['if_equals']}`"
+                )
+
     for field in front_matter:
         if allowed_fields and field not in allowed_fields:
             errors.append(f"{doc.relative_path}: unexpected front matter field `{field}`")
+
+    for field, allowed_values in schema.get("enum_front_matter", {}).items():
+        if field not in front_matter:
+            continue
+        if front_matter[field] not in allowed_values:
+            allowed = ", ".join(f"`{value}`" for value in allowed_values)
+            errors.append(
+                f"{doc.relative_path}: field `{field}` must be one of {allowed}"
+            )
 
     if "id" in front_matter:
         file_stem = doc.path.stem
@@ -230,6 +249,17 @@ def validate_doc(doc: SpecDoc) -> list[str]:
         normalized = normalize_heading(section)
         if normalized not in doc.sections:
             errors.append(f"{doc.relative_path}: missing section `## {section}`")
+
+    for condition in schema.get("conditional_required_sections", []):
+        if front_matter.get(condition["if_field"]) != condition["if_equals"]:
+            continue
+        for section in condition.get("required_sections", []):
+            normalized = normalize_heading(section)
+            if normalized not in doc.sections:
+                errors.append(
+                    f"{doc.relative_path}: missing section `## {section}` "
+                    f"when `{condition['if_field']}` is `{condition['if_equals']}`"
+                )
 
     for section in schema.get("forbidden_sections", []):
         normalized = normalize_heading(section)

@@ -2,63 +2,33 @@
 id: your-shared-component-id
 name: Your Shared Component Name
 layer: web-shared-component
-domain: your-domain-id
+component_kind: custom
 libraries:
   - shadcn
-  - radix-ui
 ---
 
 # Your Shared Component Name
 
-> Copy and rename this file to define one shared presentational component.
+> Use one of the two templates below based on component type.
 
-## Purpose
+## Choose Template
 
-Describe the reusable UI responsibility for this component.
+- Custom template:
+  - [shared-component-custom-template.md](./shared-component-custom-template.md)
+- Wrapper template:
+  - [shared-component-wrapper-template.md](./shared-component-wrapper-template.md)
 
-## Composition
+## Rule
 
-Describe how this shared component composes the listed libraries. Explain only the important top-level composition choices here. Put element-specific base components under each element in `## Elements`.
+Use exactly one template per shared component spec.
 
-## Structure
+## Required Frontmatter Rule
 
-Describe the internal area hierarchy of the component and where elements live. Include important regions, nested elements, and conditional variants such as alternate breadcrumb shapes, optional actions, or explicitly removed elements.
+- Always set `component_kind`:
+  - `custom`: for fully custom shared components.
+  - `wrapper`: for restricted wrappers around upstream primitives.
+- When `component_kind` is `wrapper`, add `wraps` with the wrapped primitive or component id, for example `shadcn/button`.
 
-Recommended shape:
+## Shared Component Boundary
 
-### Areas
-
-- `Area name`: describe the purpose of each major region such as a top bar, content block, metadata rail, or action row.
-
-### Elements
-
-- `Element name`: name the element and note which area it belongs to.
-- `Variant or condition`: note alternate cases such as `Domain > asset name` versus `Area > Domain > asset name`, or controls that are intentionally omitted.
-
-## Elements
-
-Document each element as its own subsection.
-
-Recommended shape:
-
-### `Element name`
-
-- `Parent area`: where the element lives.
-- `Purpose`: what the element is responsible for.
-- `Base components`: list the primitives or library components used to build this element, such as `shadcn/typography` or `radix-ui/avatar`.
-- `Inputs`: props, data dependencies, and rendering assumptions for this element.
-- `States`: loading, empty, error, success, disabled, hidden, or variant-specific states for this element.
-Interaction events:
-
-`<onHover>`: describe the visual or behavioral change.
-`<onClick>`: describe the navigation, save, pop-up, or other action.
-`<onChange>`: describe input or value-change behavior when relevant.
-`<onFocus>` or `<onOpen>`: describe keyboard or expanded-state behavior when relevant.
-
-If an event does nothing, say so explicitly, for example `<onClick>: none.`
-
-Repeat for every important element that another agent would need to implement or reuse correctly.
-
-## Usage Rules
-
-Describe where the component can be used and what logic must stay out of it.
+Shared components are reusable presentational building blocks. Keep route policy, domain decisions, data fetching, server calls, and BFF-specific mapping in the owning view/BFF docs.
